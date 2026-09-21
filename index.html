@@ -1,39 +1,358 @@
-<div id="alcivia-margin-game-wrap" style="width:100%;max-width:100%;margin:0 auto;">
-  <iframe
-    id="alcivia-margin-game"
-    src="https://barra1ak.github.io/alcivia-margin-game/"
-    title="ALCIVIA Margin Game"
-    allow="fullscreen"
-    allowfullscreen
-    style="width:100%;height:1100px;border:0;display:block;overflow:auto;background:#eef1eb;"
-  ></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ALCIVIA Mini MBA | The Margin Game</title>
+<style>
+:root{--green:#2f6d3d;--green2:#4c8b52;--deep:#163f24;--lime:#aec95b;--cream:#f6f3e9;--paper:#fffdf8;--ink:#1f2a22;--muted:#667269;--line:#d9e1d8;--gold:#d0a64b;--red:#a65345;--soft:#e9f3e7;--shadow:0 18px 45px rgba(31,60,37,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;overflow-x:hidden}body{margin:0;background:#eef1eb;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid rgba(174,201,91,.75);outline-offset:3px}.shell{max-width:1180px;margin:0 auto;background:var(--cream);min-height:100vh;box-shadow:var(--shadow)}
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:18px;padding:12px 20px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.05em;color:var(--deep);white-space:nowrap}.mark{width:32px;height:32px;border-radius:9px;background:var(--green);color:white;display:grid;place-items:center;font-weight:900;transform:rotate(45deg)}.mark span{transform:rotate(-45deg)}.roundprogress{flex:1;min-width:0}.roundline{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin-bottom:5px}.pbar{height:8px;background:#e7ebe5;border-radius:999px;overflow:hidden}.pfill{height:100%;width:16.67%;background:linear-gradient(90deg,var(--green),var(--lime));transition:width .35s ease}.topbtn{min-height:42px;border:1px solid var(--line);background:white;color:var(--deep);border-radius:11px;padding:9px 13px;font-weight:800}
+.hero{padding:58px 56px 54px;color:white;background:radial-gradient(circle at 85% 20%,rgba(174,201,91,.24),transparent 26%),linear-gradient(135deg,var(--deep),var(--green) 67%,#477f49);position:relative;overflow:hidden}.hero:after{content:"%";position:absolute;right:24px;bottom:-92px;font-size:270px;font-weight:900;color:rgba(255,255,255,.055);line-height:1}.eyebrow{display:inline-flex;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.1);font-size:12px;letter-spacing:.11em;text-transform:uppercase}.hero h1{font-size:clamp(42px,6vw,70px);line-height:.96;letter-spacing:-.055em;margin:18px 0 14px;max-width:820px}.hero p{font-size:19px;line-height:1.55;max-width:760px;color:rgba(255,255,255,.88)}.mission{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:850px}.mission div{padding:14px 15px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15)}.mission strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#dfe9b9;margin-bottom:4px}.btn{min-height:46px;border:0;border-radius:12px;padding:13px 18px;font-weight:850;transition:.15s}.btn:hover{transform:translateY(-1px)}.primary{background:var(--lime);color:#17341c}.secondary{background:white;color:var(--deep);border:1px solid var(--line)}.dangerish{background:#fff5f2;color:#7c3f35;border:1px solid #edd2cc}.heroactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.gamewrap{padding:34px 42px 50px}.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:24px;align-items:start}.dashboard{position:sticky;top:78px;display:grid;gap:14px;min-width:0}.dashcard{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 28px rgba(31,60,37,.05)}.dashhead{display:flex;justify-content:space-between;align-items:start;gap:12px}.dashhead h2{font-size:20px;margin:0;color:var(--deep)}.dashhead span{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--green);font-weight:900}.metricgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.metric{padding:13px;background:white;border:1px solid var(--line);border-radius:14px;min-width:0}.metric span{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}.metric strong{font-size:21px;letter-spacing:-.035em;color:var(--deep);word-break:break-word}.metric .delta{font-size:11px;font-weight:800;margin-top:5px;min-height:14px}.delta.up{color:var(--green)}.delta.down{color:var(--red)}.bank{background:linear-gradient(145deg,#eef5e9,#f8f5e8);border:1px solid #d7e2d0}.bankbig{font-size:36px;font-weight:900;letter-spacing:-.05em;color:var(--deep);margin-top:8px}.banksplit{display:grid;gap:8px;margin-top:14px}.bankrow{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #dce6d8;font-size:13px}.bankrow strong{color:var(--deep)}
+.scenario{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 12px 34px rgba(31,60,37,.06);min-width:0}.roundkicker{font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:var(--green)}.scenario h2{font-size:38px;line-height:1.02;letter-spacing:-.045em;margin:8px 0 10px;color:var(--deep)}.situation{font-size:18px;line-height:1.6;color:#4c5a4f;max-width:780px}.choicegrid{display:grid;gap:12px;margin-top:22px}.choice{width:100%;text-align:left;padding:17px 18px;border:1px solid var(--line);background:#fbfcfa;border-radius:15px;color:var(--ink);min-height:84px;transition:.15s}.choice:hover{border-color:#9db69e;transform:translateY(-1px)}.choice.selected{background:var(--soft);border-color:var(--green);box-shadow:0 0 0 2px rgba(47,109,61,.08)}.choice strong{display:block;font-size:16px;color:var(--deep)}.choice span{display:block;color:var(--muted);font-size:13px;margin-top:4px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.economics{display:none;margin-top:18px;padding:18px;border-radius:16px;background:#f7f4e7;border:1px solid #e7ddbd}.economics.show{display:block}.economics h3{margin:0 0 8px;font-size:17px;color:#6f571c}.economics ul{margin:0;padding-left:18px;color:#6c634c;line-height:1.6}.commit[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.impact{display:none;margin-top:24px}.impact.show{display:block}.impacthead{padding:18px;border-radius:17px;background:linear-gradient(135deg,var(--deep),var(--green));color:white}.impacthead strong{font-size:24px;display:block}.impacthead span{color:rgba(255,255,255,.78);font-size:13px}.impactgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}.impactpanel{padding:18px;border-radius:16px;background:white;border:1px solid var(--line)}.impactpanel .label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:var(--green)}.impactpanel strong{display:block;font-size:17px;line-height:1.45;margin-top:7px;color:var(--deep)}.lesson{margin-top:12px;padding:17px;border-left:4px solid var(--lime);background:#f3f7ee;border-radius:12px;color:#455046;line-height:1.55}.nextwrap{display:flex;justify-content:flex-end;margin-top:18px}
+.debrief{display:none}.debrief.show{display:block}.debriefhero{padding:30px;background:linear-gradient(145deg,#eef5e9,#f8f5e8);border:1px solid #d7e2d0;border-radius:22px}.profile{font-size:42px;line-height:1;letter-spacing:-.045em;color:var(--deep);margin:8px 0 12px}.summary{font-size:18px;line-height:1.6;color:#4b584d;max-width:760px}.debriefmetrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.highlightlist{display:grid;gap:10px;margin-top:18px}.highlight{padding:15px 17px;border-radius:14px;background:white;border:1px solid var(--line)}.history{margin-top:22px}.history h3{margin:0 0 12px;color:var(--deep)}.historyrow{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}.historyrow:last-child{border-bottom:0}.historyround{font-size:12px;color:var(--green);font-weight:900;text-transform:uppercase;letter-spacing:.08em}.historycopy strong{color:var(--deep)}.fineprint{font-size:12px;line-height:1.55;color:var(--muted);margin-top:20px}
+.toast{position:fixed;right:20px;bottom:20px;background:var(--deep);color:white;padding:12px 15px;border-radius:11px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.18s;z-index:80}.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1050px){.brandtext{display:none}.gamewrap{padding:26px 22px 42px}.layout{grid-template-columns:1fr}.dashboard{position:static}.metricgrid{grid-template-columns:repeat(3,1fr)}.impactgrid{grid-template-columns:1fr 1fr}.mission{grid-template-columns:1fr}}
+@media(max-width:600px){.topbar{padding:9px 10px;gap:9px}.topbtn{min-height:44px;padding:8px 9px;font-size:12px}.hero{padding:42px 20px}.hero h1{font-size:43px}.gamewrap{padding:20px 14px 34px}.scenario{padding:20px 16px;border-radius:18px}.scenario h2{font-size:32px}.metricgrid,.debriefmetrics,.impactgrid{grid-template-columns:1fr 1fr}.actions{display:grid;grid-template-columns:1fr}.actions .btn,.nextwrap .btn{width:100%}.nextwrap{display:block}.profile{font-size:34px}.historyrow{grid-template-columns:1fr;gap:4px}}
+@media(max-width:420px){.metricgrid,.debriefmetrics,.impactgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><div class="mark"><span>A</span></div><span class="brandtext">ALCIVIA MINI MBA</span></div>
+    <div class="roundprogress"><div class="roundline"><span>Round <span id="roundCurrent">1</span> of 6</span><span id="roundTitleMini">The Big Customer</span></div><div class="pbar"><div class="pfill" id="progressFill"></div></div></div>
+    <button class="topbtn" id="fullscreenBtn" type="button">⛶ Full Screen</button>
+  </header>
+
+  <section class="hero" id="intro">
+    <div class="eyebrow">ALCIVIA MINI MBA • CAPSTONE</div>
+    <h1>The Margin Game</h1>
+    <p><strong>Can you grow the business without giving away the economics?</strong> You are running a fictional business for one month. Six decisions will change the financial picture—and the customer relationship.</p>
+    <div class="mission"><div><strong>Protect</strong>customer relationships</div><div><strong>Grow</strong>gross profit</div><div><strong>Avoid</strong>accidental margin leakage</div></div>
+    <div class="heroactions"><button class="btn primary" id="startGame" type="button">Run the Month →</button></div>
+  </section>
+
+  <main class="gamewrap" id="gameArea">
+    <div class="layout">
+      <aside class="dashboard" aria-live="polite">
+        <div class="dashcard">
+          <div class="dashhead"><div><span>Month to date</span><h2>Live Dashboard</h2></div><span id="dashRound">R1</span></div>
+          <div class="metricgrid">
+            <div class="metric"><span>Revenue</span><strong id="metricRevenue">$500,000</strong><div class="delta" id="deltaRevenue"></div></div>
+            <div class="metric"><span>Gross Profit</span><strong id="metricGrossProfit">$100,000</strong><div class="delta" id="deltaGrossProfit"></div></div>
+            <div class="metric"><span>Gross Margin</span><strong id="metricMargin">20.0%</strong><div class="delta" id="deltaMargin"></div></div>
+            <div class="metric"><span>Volume Index</span><strong id="metricVolume">100</strong><div class="delta" id="deltaVolume"></div></div>
+            <div class="metric"><span>Customer Health</span><strong id="metricCustomerHealth">Strong</strong><div class="delta" id="deltaHealth"></div></div>
+            <div class="metric"><span>Round</span><strong id="metricRound">1 / 6</strong><div class="delta"></div></div>
+          </div>
+        </div>
+        <div class="dashcard bank">
+          <div class="dashhead"><div><span>Margin Bank</span><h2>Where did the economics go?</h2></div></div>
+          <div class="bankbig" id="marginBank">$100,000 GP</div>
+          <div class="banksplit">
+            <div class="bankrow"><span>Margin Given Away</span><strong id="metricGiveaway">$0</strong></div>
+            <div class="bankrow"><span>Strategic Margin Investment</span><strong id="metricInvestment">$0</strong></div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="scenario" id="scenarioCard">
+        <div class="roundkicker" id="roundKicker">Round 1</div>
+        <h2 id="roundTitle">The Big Customer</h2>
+        <p class="situation" id="roundScenario"></p>
+        <div class="choicegrid" id="choiceGrid"></div>
+        <div class="actions">
+          <button class="btn secondary" id="seeEconomics" type="button">See the Economics</button>
+          <button class="btn primary commit" id="commitChoice" type="button" disabled>Commit Decision</button>
+        </div>
+        <div class="economics" id="economicsBox"><h3 id="economicsTitle"></h3><ul id="economicsLines"></ul></div>
+        <div class="impact" id="impactBox">
+          <div class="impacthead"><span>Decision committed</span><strong id="impactChoice"></strong></div>
+          <div class="impactgrid">
+            <div class="impactpanel"><div class="label">What Changed</div><strong id="whatChanged"></strong></div>
+            <div class="impactpanel"><div class="label">What You Traded</div><strong id="whatTraded"></strong></div>
+            <div class="impactpanel"><div class="label">What You Bought</div><strong id="whatBought"></strong></div>
+          </div>
+          <div class="lesson"><strong>Business lesson:</strong> <span id="lessonText"></span></div>
+          <div class="nextwrap"><button class="btn primary" id="nextRound" type="button">Next Round →</button></div>
+        </div>
+      </section>
+
+      <section class="scenario debrief" id="debrief">
+        <div class="debriefhero"><div class="roundkicker">Month complete</div><div class="profile" id="profileName">Balanced Operator</div><div class="summary" id="profileSummary"></div></div>
+        <div class="debriefmetrics" id="debriefMetrics"></div>
+        <div class="highlightlist" id="highlightList"></div>
+        <div class="history"><h3>Your six decisions</h3><div id="historyList"></div></div>
+        <div class="actions"><button class="btn primary" id="playAgain" type="button">Play Again</button></div>
+        <p class="fineprint">All figures, scenarios, and calculations are fictional training examples and are not ALCIVIA financial results.</p>
+      </section>
+    </div>
+  </main>
 </div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
+function createInitialState() {
+  return {
+    revenue: 500000,
+    grossProfit: 100000,
+    grossMargin: 20,
+    volumeIndex: 100,
+    customerHealth: 80,
+    marginGivenAway: 0,
+    strategicMarginInvestment: 0,
+    roundIndex: 0,
+    committed: {},
+    history: []
+  };
+}
+
+function recalculate(state) {
+  const next = { ...state };
+  next.revenue = Number.isFinite(+next.revenue) ? +next.revenue : 0;
+  next.grossProfit = Number.isFinite(+next.grossProfit) ? +next.grossProfit : 0;
+  next.grossMargin = next.revenue > 0 ? (next.grossProfit / next.revenue) * 100 : 0;
+  if (!Number.isFinite(next.grossMargin)) next.grossMargin = 0;
+  return next;
+}
+
+function snapshot(state) { return JSON.parse(JSON.stringify(state)); }
+
+const ROUNDS = [
+  {
+    id:'big-customer', title:'The Big Customer', kicker:'Round 1',
+    scenario:'A major customer asks for a 5% discount in exchange for placing a larger order.',
+    economics:{title:'The discount math', lines:['Current price: $100','Direct cost: $80','Current GP/unit: $20','After 5% discount: price $95','New GP/unit: $15','Price falls 5%, but GP/unit falls 25%.']},
+    choices:[
+      {id:'full-discount',label:'Give the full 5% discount',sub:'Protect the account immediately',delta:{revenue:35000,grossProfit:-12000,volumeIndex:10,customerHealth:8,marginGivenAway:12000,strategicMarginInvestment:0},traded:'$12,000 of monthly gross profit and five points of price.',bought:'A stronger near-term retention signal, but no measurable commitment.',lesson:'A concession without a measurable return is margin leakage, even when it helps the relationship.'},
+      {id:'volume-commitment',label:'Offer 2% only with a 20% volume commitment',sub:'Trade margin for something measurable',delta:{revenue:65000,grossProfit:7000,volumeIndex:18,customerHealth:6,marginGivenAway:0,strategicMarginInvestment:5000},traded:'A smaller price concession and about $5,000 of potential unit economics.',bought:'A measurable volume commitment and stronger retention.',lesson:'Giving up margin can make sense when the return is explicit and measurable.'},
+      {id:'service-value',label:'Hold price and add service value',sub:'Differentiate without resetting price',delta:{revenue:8000,grossProfit:-2000,volumeIndex:1,customerHealth:5,marginGivenAway:0,strategicMarginInvestment:2000},traded:'$2,000 of service capacity.',bought:'A differentiated customer experience while preserving price.',lesson:'Price is not the only lever. Service value can protect economics while supporting the relationship.'}
+    ]
+  },
+  {
+    id:'costs-rise', title:'Costs Rise', kicker:'Round 2',
+    scenario:'Supplier and product costs unexpectedly increase this month.',
+    economics:{title:'Cost pressure', lines:['A 6% cost increase can compress GP quickly if price and operations do not respond.','The best response depends on price sensitivity, timing, and what cost actions are actually available.']},
+    choices:[
+      {id:'absorb',label:'Absorb the increase',sub:'Keep customer pricing unchanged',delta:{revenue:0,grossProfit:-16000,volumeIndex:0,customerHealth:2,marginGivenAway:16000,strategicMarginInvestment:0},traded:'$16,000 of gross profit.',bought:'Price stability for customers this month.',lesson:'Absorbing cost pressure protects price, but it quietly compresses every unit of margin.'},
+      {id:'pass-through',label:'Pass the full increase through',sub:'Defend unit economics',delta:{revenue:26000,grossProfit:15000,volumeIndex:-5,customerHealth:-6,marginGivenAway:0,strategicMarginInvestment:0},traded:'Some volume and customer comfort.',bought:'Protection of unit economics.',lesson:'Passing cost through protects margin but can create demand and relationship risk.'},
+      {id:'split',label:'Split the increase',sub:'Share the pressure',delta:{revenue:13000,grossProfit:-3000,volumeIndex:-1,customerHealth:-1,marginGivenAway:3000,strategicMarginInvestment:0},traded:'About $3,000 of gross profit.',bought:'A softer customer price move.',lesson:'Partial pass-through balances margin defense with customer sensitivity.'},
+      {id:'savings',label:'Find savings + make a smaller price move',sub:'Work both sides of the equation',delta:{revenue:9000,grossProfit:7000,volumeIndex:0,customerHealth:1,marginGivenAway:0,strategicMarginInvestment:3500},traded:'Management attention and $3,500 of improvement effort.',bought:'A smaller customer price move plus better cost discipline.',lesson:'Margin can be protected through price, cost, or both.'}
+    ]
+  },
+  {
+    id:'service-recovery', title:'Service Recovery', kicker:'Round 3',
+    scenario:'A preventable service or delivery problem disrupts an important customer.',
+    economics:{title:'The recovery question',lines:['The immediate cost of recovery is visible.','The value of restored trust is harder to see, but it can still be strategically important.']},
+    choices:[
+      {id:'minimum',label:'Do the minimum',sub:'Protect this month\'s cost',delta:{revenue:-18000,grossProfit:-4000,volumeIndex:-4,customerHealth:-12,marginGivenAway:0,strategicMarginInvestment:0},traded:'Customer confidence and some future demand.',bought:'Lower recovery cost this month.',lesson:'Protecting current margin can expose future revenue when trust is damaged.'},
+      {id:'expedited-recovery',label:'Absorb expedited recovery costs',sub:'Spend now to restore trust',delta:{revenue:0,grossProfit:-7000,volumeIndex:0,customerHealth:12,marginGivenAway:0,strategicMarginInvestment:7000},traded:'$7,000 of current-month gross profit.',bought:'A fast service recovery and stronger customer trust.',lesson:'Margin can be invested strategically when the return is identifiable.'},
+      {id:'future-credit',label:'Offer a future credit',sub:'Spread the recovery into future business',delta:{revenue:-4000,grossProfit:-5000,volumeIndex:1,customerHealth:8,marginGivenAway:0,strategicMarginInvestment:5000},traded:'$5,000 of future economics.',bought:'A reason for the customer to continue the relationship.',lesson:'A future credit can link the recovery expense to future business rather than simply refunding value today.'}
+    ]
+  },
+  {
+    id:'volume-trap', title:'The Volume Trap', kicker:'Round 4',
+    scenario:'Sales can increase sharply if you offer a large discount to chase volume.',
+    economics:{title:'Revenue is not the scoreboard',lines:['A large discount can produce impressive top-line growth.','If unit gross profit falls too far, total GP can still decline even with many more units.']},
+    choices:[
+      {id:'chase-volume',label:'Take the deal and chase the volume',sub:'Grow the top line fast',delta:{revenue:120000,grossProfit:-12000,volumeIndex:28,customerHealth:6,marginGivenAway:18000,strategicMarginInvestment:0},traded:'A major price concession.',bought:'Substantial volume and revenue growth.',lesson:'Top-line growth is useful only when the economics underneath it still create value.'},
+      {id:'smaller-offer',label:'Offer a smaller incentive',sub:'Seek growth without the full concession',delta:{revenue:65000,grossProfit:11000,volumeIndex:14,customerHealth:3,marginGivenAway:4000,strategicMarginInvestment:0},traded:'$4,000 of margin.',bought:'Moderate volume growth.',lesson:'A smaller concession can preserve more of the economics while still stimulating demand.'},
+      {id:'protect-economics',label:'Decline the discount and protect economics',sub:'Keep the unit model intact',delta:{revenue:8000,grossProfit:5000,volumeIndex:1,customerHealth:-2,marginGivenAway:0,strategicMarginInvestment:0},traded:'Some near-term growth opportunity.',bought:'Stronger unit economics and pricing discipline.',lesson:'Sometimes the best economic choice is to let unprofitable volume go.'}
+    ]
+  },
+  {
+    id:'competitor-attack', title:'Competitor Attack', kicker:'Round 5',
+    scenario:'A competitor cuts price and customers begin asking how you will respond.',
+    economics:{title:'Three competitive levers',lines:['Match price: faster retention, expensive economics.','Conditional concession: trade margin for a commitment.','Value/service: protect price but accept some volume risk.']},
+    choices:[
+      {id:'match',label:'Match the competitor',sub:'Protect volume immediately',delta:{revenue:18000,grossProfit:-14000,volumeIndex:7,customerHealth:6,marginGivenAway:14000,strategicMarginInvestment:0},traded:'$14,000 of gross profit.',bought:'A fast defensive response, with no added commitment.',lesson:'Automatic matching can train the market to make price the only conversation.'},
+      {id:'conditional',label:'Smaller concession + commitment',sub:'Require something measurable',delta:{revenue:38000,grossProfit:3000,volumeIndex:9,customerHealth:4,marginGivenAway:0,strategicMarginInvestment:4500},traded:'A measured concession worth about $4,500.',bought:'A volume/term commitment and stronger retention.',lesson:'Conditions turn a concession into an exchange.'},
+      {id:'differentiate',label:'Hold price and differentiate',sub:'Compete on service and value',delta:{revenue:-10000,grossProfit:-1000,volumeIndex:-3,customerHealth:1,marginGivenAway:0,strategicMarginInvestment:2500},traded:'Some volume risk and $2,500 of service effort.',bought:'Price integrity and a stronger value proposition.',lesson:'Holding price can preserve the model, but only if the differentiation is meaningful.'}
+    ]
+  },
+  {
+    id:'capacity-choice', title:'Capacity Choice', kicker:'Round 6',
+    scenario:'You have limited capacity and can prioritize only one growth opportunity.',
+    economics:{title:'Capacity makes tradeoffs visible',lines:['High revenue is not automatically high value.','When capacity is constrained, contribution and strategic value matter.']},
+    choices:[
+      {id:'high-revenue',label:'High-revenue, low-margin customer',sub:'Biggest top-line opportunity',delta:{revenue:90000,grossProfit:6000,volumeIndex:18,customerHealth:2,marginGivenAway:7000,strategicMarginInvestment:0},traded:'Capacity and $7,000 of margin potential.',bought:'The largest top-line gain.',lesson:'A large account can consume scarce capacity without creating the most gross profit.'},
+      {id:'high-margin-growth',label:'Higher-margin growth customer',sub:'Lower revenue, better contribution',delta:{revenue:55000,grossProfit:18000,volumeIndex:10,customerHealth:4,marginGivenAway:0,strategicMarginInvestment:0},traded:'Some top-line scale.',bought:'The strongest incremental gross-profit contribution.',lesson:'When capacity is scarce, contribution can matter more than headline revenue.'},
+      {id:'relationship-value',label:'High-relationship-value customer',sub:'Balanced economics and long-term value',delta:{revenue:42000,grossProfit:11000,volumeIndex:7,customerHealth:10,marginGivenAway:0,strategicMarginInvestment:3000},traded:'$3,000 of relationship investment and some immediate scale.',bought:'Balanced contribution plus relationship strength.',lesson:'Strategic value can include both current economics and the quality of the relationship.'}
+    ]
+  }
+];
+
+function commitChoice(state, roundId, choiceId) {
+  const round = ROUNDS.find(r => r.id === roundId);
+  if (!round) throw new Error(`Unknown round: ${roundId}`);
+  const choice = round.choices.find(c => c.id === choiceId);
+  if (!choice) throw new Error(`Unknown choice: ${choiceId}`);
+  if (state.committed && state.committed[roundId]) return state;
+  const before = snapshot(state);
+  const d = choice.delta;
+  let next = {
+    ...state,
+    revenue: state.revenue + d.revenue,
+    grossProfit: state.grossProfit + d.grossProfit,
+    volumeIndex: Math.max(0, state.volumeIndex + d.volumeIndex),
+    customerHealth: Math.max(0, Math.min(100, state.customerHealth + d.customerHealth)),
+    marginGivenAway: Math.max(0, state.marginGivenAway + d.marginGivenAway),
+    strategicMarginInvestment: Math.max(0, state.strategicMarginInvestment + d.strategicMarginInvestment),
+    committed: { ...(state.committed || {}), [roundId]: choiceId }
+  };
+  next = recalculate(next);
+  const after = snapshot(next);
+  next.history = [...(state.history || []), {roundId, choiceId, before, after, traded:choice.traded, bought:choice.bought, lesson:choice.lesson}];
+  const nextIdx = ROUNDS.findIndex(r => !next.committed[r.id]);
+  next.roundIndex = nextIdx === -1 ? ROUNDS.length : nextIdx;
+  return next;
+}
+
+function buildDebrief(state) {
+  const giveaway = Math.max(0, state.marginGivenAway || 0);
+  const investment = Math.max(0, state.strategicMarginInvestment || 0);
+  const health = Math.max(0, Math.min(100, state.customerHealth || 0));
+  const margin = Number.isFinite(state.grossMargin) ? state.grossMargin : 0;
+  const volumeGrowth = (state.volumeIndex || 0) - 100;
+  let profile = 'Balanced Operator';
+  let summary = 'You made measured tradeoffs across price, volume, relationships, and unit economics.';
+  if (giveaway >= 20000 && health >= 88) {
+    profile = 'Relationship Protector';
+    summary = 'You protected customer relationships aggressively, but several concessions were made without requiring something measurable in return.';
+  } else if (volumeGrowth >= 25 && margin < 18) {
+    profile = 'Growth Seeker';
+    summary = 'You leaned into growth and volume. The opportunity is to make sure top-line gains continue to create enough gross profit.';
+  } else if (margin >= 21 && giveaway <= 5000 && health < 78) {
+    profile = 'Margin Defender';
+    summary = 'You defended unit economics consistently, but some choices created customer and volume risk.';
+  }
+  const marginProtected = Math.max(0, 100000 - giveaway);
+  return {
+    profile,
+    summary,
+    metrics: {
+      revenue: state.revenue,
+      grossProfit: state.grossProfit,
+      grossMargin: margin,
+      customerHealth: health,
+      marginGivenAway: giveaway,
+      strategicMarginInvestment: investment,
+      marginProtected
+    },
+    highlights: [
+      giveaway ? `You gave away $${Math.round(giveaway).toLocaleString('en-US')} without a measurable return.` : 'You avoided unmeasured margin leakage.',
+      investment ? `You intentionally invested $${Math.round(investment).toLocaleString('en-US')} of margin to buy identifiable value.` : 'You made no explicit strategic margin investments.',
+      `Your ending customer-health index was ${Math.round(health)}.`
+    ]
+  };
+}
+
+function seeded(seed = 1) {
+  let x = (Number(seed) || 1) >>> 0;
+  return function rand() {
+    x = (1664525 * x + 1013904223) >>> 0;
+    return x / 4294967296;
+  };
+}
+
+function createGame(seed = 1) {
+  const rand = seeded(seed);
+  const s = createInitialState();
+  s.seed = seed;
+  s.variants = {
+    costIncreasePct: 4 + Math.floor(rand() * 5),
+    competitorDiscountPct: 4 + Math.floor(rand() * 6),
+    customerVolumeCommitmentPct: 15 + Math.floor(rand() * 11),
+    surpriseServiceCost: 5000 + Math.floor(rand() * 4001),
+    capacityIndex: 85 + Math.floor(rand() * 16)
+  };
+  return s;
+}
+
+function replay(_state, seed = Date.now()) {
+  return createGame(seed);
+}
+
+function getRoundView(state, roundId) {
+  const base = ROUNDS.find(r => r.id === roundId);
+  if (!base) throw new Error(`Unknown round: ${roundId}`);
+  const v = state.variants || {};
+  const view = { ...base, economics: base.economics ? { ...base.economics, lines: [...base.economics.lines] } : null };
+  if (roundId === 'big-customer' && v.customerVolumeCommitmentPct) {
+    view.scenario = `A major customer asks for a 5% discount while offering up to a ${v.customerVolumeCommitmentPct}% volume commitment.`;
+  }
+  if (roundId === 'costs-rise' && v.costIncreasePct) {
+    view.scenario = `Supplier and product costs unexpectedly increase by ${v.costIncreasePct}% this month.`;
+    if (view.economics) view.economics.lines[0] = `A ${v.costIncreasePct}% cost increase can compress GP quickly if price and operations do not respond.`;
+  }
+  if (roundId === 'service-recovery' && v.surpriseServiceCost) {
+    if (view.economics) view.economics.lines[0] = `The immediate recovery cost could be about $${Math.round(v.surpriseServiceCost).toLocaleString('en-US')}.`;
+  }
+  if (roundId === 'competitor-attack' && v.competitorDiscountPct) {
+    view.scenario = `A competitor cuts price by ${v.competitorDiscountPct}% and customers begin asking how you will respond.`;
+  }
+  if (roundId === 'capacity-choice' && v.capacityIndex) {
+    view.scenario = `Available operating capacity is running at an index of ${v.capacityIndex}. You can prioritize only one growth opportunity.`;
+  }
+  return view;
+}
+
+
 (function(){
-  const iframe=document.getElementById('alcivia-margin-game');
-  const allowedOrigin='https://barra1ak.github.io';
-  function valid(event){return event.origin===allowedOrigin&&event.source===iframe.contentWindow;}
-  function requestMeasure(){iframe.contentWindow?.postMessage({type:'alcivia-request-height'},allowedOrigin);}
-  window.addEventListener('message',async function(event){
-    if(!valid(event))return;
-    const data=event.data||{};
-    if(data.type==='alcivia-simulator-height'&&document.fullscreenElement!==iframe){
-      const newHeight=Math.max(420,Math.min(16000,Number(data.height)||0));
-      iframe.style.height=newHeight+'px';
-    }
-    if(data.type==='alcivia-fullscreen-request'){
-      try{if(iframe.requestFullscreen)await iframe.requestFullscreen();}
-      catch(err){console.warn('Fullscreen unavailable',err);}
-    }
-    if(data.type==='alcivia-fullscreen-exit'){
-      if(document.fullscreenElement&&document.exitFullscreen)await document.exitFullscreen();
-    }
-  });
-  document.addEventListener('fullscreenchange',function(){
-    const active=document.fullscreenElement===iframe;
-    iframe.contentWindow?.postMessage({type:'alcivia-fullscreen-state',active:active},allowedOrigin);
-    if(!active){setTimeout(requestMeasure,80);setTimeout(requestMeasure,300);}
-  });
-  iframe.addEventListener('load',()=>{requestMeasure();setTimeout(requestMeasure,300);});
+  const $=id=>document.getElementById(id);
+  const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const pct=n=>(Math.round(n*10)/10).toFixed(1)+'%';
+  const signedMoney=n=>(n>0?'+':'')+money(n);
+  const healthLabel=n=>n>=88?'Excellent':n>=78?'Strong':n>=66?'Watch':n>=50?'At Risk':'Fragile';
+  let state=createGame(20260921),selectedChoice=null,roundBefore=null;
+
+  function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove('show'),1600)}
+  function currentRound(){const base=ROUNDS[Math.min(state.roundIndex,ROUNDS.length-1)];return getRoundView(state,base.id)}
+  function setDelta(id,value,formatter=signedMoney,neutral=false){const el=$(id);if(!el)return;if(neutral||value===0){el.textContent='';el.className='delta';return}el.textContent=formatter(value);el.className='delta '+(value>0?'up':'down')}
+  function updateDashboard(before=null){
+    $('metricRevenue').textContent=money(state.revenue);$('metricGrossProfit').textContent=money(state.grossProfit);$('metricMargin').textContent=pct(state.grossMargin);$('metricVolume').textContent=Math.round(state.volumeIndex);$('metricCustomerHealth').textContent=healthLabel(state.customerHealth);$('metricGiveaway').textContent=money(state.marginGivenAway);$('metricInvestment').textContent=money(state.strategicMarginInvestment);$('marginBank').textContent=money(state.grossProfit)+' GP';
+    const shown=Math.min(state.roundIndex+1,6);$('metricRound').textContent=shown+' / 6';$('dashRound').textContent='R'+shown;
+    if(before){setDelta('deltaRevenue',state.revenue-before.revenue);setDelta('deltaGrossProfit',state.grossProfit-before.grossProfit);setDelta('deltaMargin',state.grossMargin-before.grossMargin,v=>(v>0?'+':'')+(Math.round(v*10)/10).toFixed(1)+' pts');setDelta('deltaVolume',state.volumeIndex-before.volumeIndex,v=>(v>0?'+':'')+Math.round(v));setDelta('deltaHealth',state.customerHealth-before.customerHealth,v=>(v>0?'+':'')+Math.round(v));} else {['deltaRevenue','deltaGrossProfit','deltaMargin','deltaVolume','deltaHealth'].forEach(id=>setDelta(id,0));}
+  }
+  function renderRound(){
+    if(state.roundIndex>=ROUNDS.length){renderDebrief();return}
+    const r=currentRound();selectedChoice=null;roundBefore=null;$('roundCurrent').textContent=state.roundIndex+1;$('roundTitleMini').textContent=r.title;$('progressFill').style.width=((state.roundIndex+1)/6*100)+'%';$('roundKicker').textContent='Round '+(state.roundIndex+1)+' of 6';$('roundTitle').textContent=r.title;$('roundScenario').textContent=r.scenario;$('seeEconomics').style.display=r.economics?'inline-flex':'none';$('economicsBox').classList.remove('show');$('impactBox').classList.remove('show');$('commitChoice').disabled=true;$('commitChoice').style.display='inline-flex';$('nextRound').textContent=state.roundIndex===5?'See Your Month →':'Next Round →';
+    const grid=$('choiceGrid');grid.innerHTML='';r.choices.forEach(c=>{const b=document.createElement('button');b.className='choice';b.type='button';b.innerHTML='<strong>'+c.label+'</strong><span>'+c.sub+'</span>';b.addEventListener('click',()=>{grid.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selectedChoice=c.id;$('commitChoice').disabled=false;});grid.appendChild(b);});
+    $('economicsTitle').textContent=r.economics?.title||'';$('economicsLines').innerHTML=(r.economics?.lines||[]).map(x=>'<li>'+x+'</li>').join('');updateDashboard();window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function describeChanges(before,after){
+    const parts=[];const rd=after.revenue-before.revenue,gp=after.grossProfit-before.grossProfit,mp=after.grossMargin-before.grossMargin,hd=after.customerHealth-before.customerHealth;
+    if(rd)parts.push('Revenue '+(rd>0?'rose ':'fell ')+money(Math.abs(rd)));if(gp)parts.push('GP '+(gp>0?'rose ':'fell ')+money(Math.abs(gp)));if(mp)parts.push('margin '+(mp>0?'improved ':'compressed ')+Math.abs(mp).toFixed(1)+' pts');if(hd)parts.push('customer health '+(hd>0?'improved':'weakened'));
+    return parts.join(' • ')||'The dashboard held essentially steady.';
+  }
+  function commitSelected(){
+    if(!selectedChoice)return;const r=currentRound();roundBefore=snapshot(state);const c=r.choices.find(x=>x.id===selectedChoice);state=commitChoice(state,r.id,selectedChoice);$('commitChoice').style.display='none';$('choiceGrid').querySelectorAll('button').forEach(b=>b.disabled=true);$('whatChanged').textContent=describeChanges(roundBefore,state);$('whatTraded').textContent=c.traded;$('whatBought').textContent=c.bought;$('lessonText').textContent=c.lesson;$('impactChoice').textContent=c.label;$('impactBox').classList.add('show');updateDashboard(roundBefore);toast('Decision committed');
+  }
+  function renderDebrief(){
+    $('scenarioCard').style.display='none';$('debrief').classList.add('show');$('roundCurrent').textContent='6';$('roundTitleMini').textContent='Month Complete';$('progressFill').style.width='100%';$('dashRound').textContent='DONE';const d=buildDebrief(state);$('profileName').textContent=d.profile;$('profileSummary').textContent=d.summary;
+    const metrics=[['Ending Revenue',money(d.metrics.revenue)],['Ending Gross Profit',money(d.metrics.grossProfit)],['Ending Gross Margin',pct(d.metrics.grossMargin)],['Customer Health',healthLabel(d.metrics.customerHealth)],['Margin Protected',money(d.metrics.marginProtected)],['Strategic Investment',money(d.metrics.strategicMarginInvestment)],['Margin Given Away',money(d.metrics.marginGivenAway)]];$('debriefMetrics').innerHTML=metrics.map(([l,v])=>'<div class="metric"><span>'+l+'</span><strong>'+v+'</strong></div>').join('');$('highlightList').innerHTML=d.highlights.map(x=>'<div class="highlight">'+x+'</div>').join('');
+    $('historyList').innerHTML=state.history.map((h,i)=>{const r=ROUNDS.find(x=>x.id===h.roundId),c=r.choices.find(x=>x.id===h.choiceId);return '<div class="historyrow"><div class="historyround">Round '+(i+1)+'</div><div class="historycopy"><strong>'+r.title+': '+c.label+'</strong><div style="color:var(--muted);margin-top:4px">'+h.lesson+'</div></div></div>'}).join('');updateDashboard();window.scrollTo({top:0,behavior:'smooth'});
+  }
+  $('startGame').addEventListener('click',()=>$('gameArea').scrollIntoView({behavior:'smooth'}));$('seeEconomics').addEventListener('click',()=>$('economicsBox').classList.toggle('show'));$('commitChoice').addEventListener('click',commitSelected);$('nextRound').addEventListener('click',renderRound);$('playAgain').addEventListener('click',()=>{state=replay(state,Date.now());$('scenarioCard').style.display='block';$('debrief').classList.remove('show');renderRound();toast('Fresh month loaded');scheduleHeight();});$('fullscreenBtn').addEventListener('click',()=>{window.parent.postMessage({type:window.__alciviaFullscreen?'alcivia-fullscreen-exit':'alcivia-fullscreen-request'},'*');});
+  renderRound();
 })();
 </script>
+
+<script>
+(function(){
+  let lastHeight=0, resizeTimer=null; window.__alciviaFullscreen=false;
+  function getPageHeight(){const shell=document.querySelector('.shell');return Math.ceil(shell?shell.getBoundingClientRect().height:document.body.scrollHeight);}
+  function sendHeight(force=false){requestAnimationFrame(function(){const height=getPageHeight();if(!force&&Math.abs(height-lastHeight)<3)return;lastHeight=height;window.parent.postMessage({type:'alcivia-simulator-height',height:height},'*');});}
+  window.scheduleHeight=function(){clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>sendHeight(),80);};
+  window.addEventListener('load',()=>{sendHeight(true);setTimeout(()=>sendHeight(true),250);setTimeout(()=>sendHeight(true),750);});
+  if('ResizeObserver'in window){const ro=new ResizeObserver(()=>window.scheduleHeight());ro.observe(document.body);const shell=document.querySelector('.shell');if(shell)ro.observe(shell);}
+  if('MutationObserver'in window){new MutationObserver(()=>window.scheduleHeight()).observe(document.body,{childList:true,subtree:true,attributes:true});}
+  document.addEventListener('click',()=>{window.scheduleHeight();setTimeout(()=>sendHeight(),300);});
+  window.addEventListener('resize',window.scheduleHeight);
+  window.addEventListener('message',function(event){const data=event.data||{};if(data.type==='alcivia-request-height')sendHeight(true);if(data.type==='alcivia-fullscreen-state'){window.__alciviaFullscreen=!!data.active;const btn=document.getElementById('fullscreenBtn');if(btn)btn.textContent=data.active?'Exit Full Screen':'⛶ Full Screen';if(!data.active){sendHeight(true);setTimeout(()=>sendHeight(true),250);}}});
+})();
+</script>
+</body>
+</html>
